@@ -8,6 +8,10 @@ What problem or pain point does it solve? a. Keep it high level without going in
 
 This is a great icebreaker that opens up conversation for a group of people. It helps display commonalities between users. This is a great team building exercise to use for users who want to create interaction among a group of people.
 
+
+
+
+
 ## User Story #1
 
 1. As a host, I want to generate a list of questions for users in my group to answer.
@@ -117,3 +121,4 @@ Medium Half of a day.
 
 5.Estimation
 Small 3-4 hours.
+
