@@ -8,7 +8,7 @@ function AuthButtons() {
   const {
     isAuthenticated,
   } = useAuth0();
-
+  console.log(isAuthenticated);
   return isAuthenticated ? <Logout /> : <Login />
 }
 
