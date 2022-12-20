@@ -39,10 +39,10 @@ class Welcome extends React.Component {
         {/* <NavItem><Link to="/about" className="nav-link">About Us</Link>
         </NavItem> */}
       {/* </Navbar><AuthButtons /> */}
-      {auth0.isAuthenticated
+      {/* {auth0.isAuthenticated
       ? <button onClick={this.request} > Login </button>
       : null
-      }
+      } */}
       </>
       
     )
