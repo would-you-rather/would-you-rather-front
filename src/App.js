@@ -1,4 +1,3 @@
-import './App.css';
 import GameSelection from './GameSelection';
 // import PlayAgain from './PlayAgain';
 // import Question from './Question';
