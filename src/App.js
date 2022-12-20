@@ -1,8 +1,7 @@
+import './App.css';
+import AuthButtons from './auth/AuthButton';
+import Welcome from './Welcome';
 import GameSelection from './GameSelection';
-// import PlayAgain from './PlayAgain';
-// import Question from './Question';
-
-
 function App() {
   return (
     <div className="App">
