@@ -1,7 +1,7 @@
 import './App.css';
 import AuthButtons from './auth/AuthButton';
 import Welcome from './Welcome';
-import GameSelection from './GameSelection';
+// import GameSelection from './GameSelection';
 function App() {
   return (
     <div className="App">
@@ -11,7 +11,7 @@ function App() {
         
         
         <AuthButtons />
-        <GameSelection></GameSelection>
+        {/* <GameSelection></GameSelection> */}
       </header>
     </div>
   );

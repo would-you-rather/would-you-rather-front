@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navbar, NavItem } from 'react-bootstrap';
-import AuthButtons from './auth/AuthButton';
+// import { Navbar, NavItem } from 'react-bootstrap';
+// import AuthButtons from './auth/AuthButton';
 // import { Link } from "react-router-dom";
 import {withAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
@@ -14,7 +14,7 @@ class Welcome extends React.Component {
 
     let request = {
       method: 'GET',
-      url: 'http://localhost3001/test',
+      url: 'http://localhost3002/rooms',
       headers: {
         Authorization: `Bearer ${token}`
       }
