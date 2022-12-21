@@ -101,7 +101,7 @@ class GameSelection extends React.Component {
         this.setState({
             roomId: response.data._id,
             isCurrentUserOwner: true,
-            selectedQuestionIndex: 0,
+            selectedQuestionIndex: this.state.selectedQuestionIndex + 1,
             question: currentQuestion,
         });
     }
@@ -171,13 +171,22 @@ class GameSelection extends React.Component {
                     this.state.question.isLast && 
                     <h1>This is the last question! 🎉</h1>}
 
-                {   ((!this.state.question) ||
-                    (this.state.question && (!this.state.question.isLast))) && <Button onClick={this.moveNext}>
+                {((!this.state.question) ||
+                    (this.state.question && (!this.state.question.isLast))) && 
+                    <Button onClick={this.moveNext}>
                     {this.state.selectedQuestionIndex === -1 ? "Start Game" : "Next Question"}
                 </Button>}
                 
 
-                {this.state.question && <QuestionsAttendee question={this.state.question.question} />}
+                {this.state.question && 
+                    <QuestionsAttendee 
+                        roomId={this.state.roomId}
+                        userId={this.props.auth0.user.email}
+                        questionListId="Fun"
+                        questionIndex={this.state.selectedQuestionIndex}
+                        question={this.state.question.question} 
+
+                />}
             
                 <hr />
                 <p>Share the following link with your friends.</p>
