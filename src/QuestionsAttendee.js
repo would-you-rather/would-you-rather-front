@@ -29,7 +29,7 @@ class QuestionsAttendee extends React.Component {
         }
 
         let response = await axios(request);
-        console.log(response.data);
+        console.log("This is the question responses", response.data);
 
     }
 

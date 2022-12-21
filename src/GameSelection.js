@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap/';
 import {withAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
 import QuestionsAttendee from './QuestionsAttendee';
+import ShowResults from './ShowResults';
 
 
 class GameSelection extends React.Component {
@@ -179,14 +180,23 @@ class GameSelection extends React.Component {
                 
 
                 {this.state.question && 
-                    <QuestionsAttendee 
-                        roomId={this.state.roomId}
-                        userId={this.props.auth0.user.email}
-                        questionListId="Fun"
-                        questionIndex={this.state.selectedQuestionIndex}
-                        question={this.state.question.question} 
+                    <>
+                        <QuestionsAttendee 
+                            roomId={this.state.roomId}
+                            userId={this.props.auth0.user.email}
+                            questionListId="Fun"
+                            questionIndex={this.state.selectedQuestionIndex}
+                            question={this.state.question.question} 
+                        />
+                        <ShowResults
+                            roomId={this.state.roomId}
+                            questionListId="Fun"
+                            questionIndex={this.state.selectedQuestionIndex}
+                            question={this.state.question.question}
+                        />
 
-                />}
+                    </>
+                    }
             
                 <hr />
                 <p>Share the following link with your friends.</p>
