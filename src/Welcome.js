@@ -3,25 +3,34 @@ import React from 'react';
 // import AuthButtons from './auth/AuthButton';
 // import { Link } from "react-router-dom";
 import {withAuth0} from '@auth0/auth0-react';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Welcome extends React.Component {
+
+  constructor(props) {
+    super(props);
+      this.state = {
+        roomId: '',
+      }
+  }
+
+
 
   request = async() => {
     let res =  await this.props.auth0.getIdTokenClaims();
     let token = res._raw;
     console.log(token);
 
-    let request = {
-      method: 'GET',
-      url: 'http://localhost3002/rooms',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+    // let request = {
+    //   method: 'GET',
+    //   url: 'http://localhost3002/rooms',
+    //   headers: {
+    //     Authorization:`Bearer ${token}`
+    //   }
+    // }
 
-    let response = await axios(request);
-    console.log(response.data);
+    // let response = await axios(request);
+    // console.log(response.data);
   }
 
   render() {
@@ -39,11 +48,12 @@ class Welcome extends React.Component {
         {/* <NavItem><Link to="/about" className="nav-link">About Us</Link>
         </NavItem> */}
       {/* </Navbar><AuthButtons /> */}
-      {/* {auth0.isAuthenticated
+      
+      { auth0.isAuthenticated
       ? <button onClick={this.request} > Login </button>
       : null
-      } */}
-      </>
+       }
+      </> 
       
     )
   }
