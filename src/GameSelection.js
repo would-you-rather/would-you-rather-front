@@ -3,25 +3,29 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap/';
 import {withAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
-
+import QuestionsAttendee from './QuestionsAttendee';
 
 class GameSelection extends React.Component {
     constructor() {
         
         super();
+
+        const roomId = new URLSearchParams(window.location.search).get('room');
+
         this.state = {
-          roomId: '',
-        }
+            roomId: roomId,
+            isCurrentUserOwner: false,
+        };
     }
 
-    request = async() => {
+    getRoom = async(id) => {
         let res =  await this.props.auth0.getIdTokenClaims();
         let token = res._raw;
         console.log(token);
     
         let request = {
           method: 'GET',
-          url: 'http://localhost:3002/rooms',
+          url: `http://localhost:3002/rooms/${id}`,
           headers: {
             Authorization:`Bearer ${token}`
           }
@@ -29,6 +33,11 @@ class GameSelection extends React.Component {
     
         let response = await axios(request);
         console.log(response.data);
+
+        this.setState({
+            roomId: response.data._id,
+            isCurrentUserOwner: response.data.owner === this.props.auth0.user.email,
+        });
       }
     
     createRoom = async() => {
@@ -53,14 +62,18 @@ class GameSelection extends React.Component {
         console.log(response.data);
 
         this.setState({
-            roomId: response.data._id
+            roomId: response.data._id,
+            isCurrentUserOwner: true,
         });
 
     }
 
+    componentDidMount() {
+        if (this.state.roomId) {
+            this.getRoom(this.state.roomId);
+        }
+    }
 
-
-    
     render() {
 
         return (
@@ -71,7 +84,7 @@ class GameSelection extends React.Component {
 
         { (!this.state.roomId) && <>
             <Form>
-                <Form.Label>Choose a theme</Form.Label>
+                <Form.Label>Choose a theme for the game</Form.Label>
                 <Form.Select onChange = {this.handleChange} as = 'select'>
                             <option>Fun</option>
                             
@@ -84,15 +97,15 @@ class GameSelection extends React.Component {
             </>
         }
 
-        {this.state.roomId &&
+        {this.state.isCurrentUserOwner &&
             <div>
                 <Button>Start Game</Button>
                 <p>Share the following link with your friends.</p>
                 <input 
                     readOnly= {true} 
                     type="text" 
-                    value = {window.location.href + "#/?room=" + this.state.roomId} />
-                <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "#/?room=" + this.state.roomId)}}>Copy</Button>         
+                    value = {window.location.href + "?room=" + this.state.roomId} />
+                <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>         
             </div>
         }
 

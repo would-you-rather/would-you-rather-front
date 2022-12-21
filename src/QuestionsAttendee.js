@@ -2,18 +2,21 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button} from 'react-bootstrap/';
 
-class QuestionAttendee extends React.Component {
+class QuestionsAttendee extends React.Component {
     constructor() {
         super();
         this.state = {
-        }
+            question: {
+                question: '',
+                option1: '',
+                option2: '',
+            }   
+    }
     }
     render() {
-
         return (
 <>
 <h1>Would you rather..</h1>
-
 <div>
 <p> </p>
 </div>
@@ -26,4 +29,4 @@ class QuestionAttendee extends React.Component {
         )
     }
 }
-export default QuestionAttendee;
+export default QuestionsAttendee;
