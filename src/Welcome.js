@@ -2,6 +2,7 @@ import React from 'react';
 
 import {withAuth0} from '@auth0/auth0-react';
 
+import { ReactComponent as WelcomeSVG } from './welcome.svg'
 
 class Welcome extends React.Component {
 
@@ -27,11 +28,15 @@ class Welcome extends React.Component {
       <>
       <h1> Welcome to This or That</h1>
       <h2>Sign in to continue</h2>
+
+      <WelcomeSVG />
       
       { auth0.isAuthenticated
       ? <button onClick={this.request} > Login </button>
       : null
        }
+
+ 
       </> 
       
     )
