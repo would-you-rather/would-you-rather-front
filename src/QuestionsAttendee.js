@@ -37,9 +37,9 @@ class QuestionsAttendee extends React.Component {
     render() {
         return (
             <>
-                <h1>{this.props.question[0]}</h1>
-                <Button onClick={() => this.saveResponse(0)}>{this.props.question[1]}</Button>
-                <Button onClick={() => this.saveResponse(1)}>{this.props.question[2]}</Button>
+                {/* <h1>{this.props.question[0]}</h1> */}
+                <Button onClick={() => this.saveResponse(0)}>{this.props.question[0]}</Button>
+                <Button onClick={() => this.saveResponse(1)}>{this.props.question[1]}</Button>
             </>
         )
     }
