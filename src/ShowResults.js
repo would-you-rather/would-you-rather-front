@@ -11,7 +11,7 @@ class ShowResults extends React.Component {
         super();
         this.state = {
             resultData: [],
-            response: false
+            currentQuestionId: '',
         }
 
     }
@@ -41,8 +41,7 @@ class ShowResults extends React.Component {
         })
     }
 
-
-
+    
 
     render() {
 
@@ -50,37 +49,29 @@ class ShowResults extends React.Component {
         console.log(this.props, 'this props');
 
 
-
         return (
 
 
             <>
-                {/* <h1>Results - {this.props.question[0]}</h1> */}
+               
                 <Button onClick={this.getResponses}>Show Results</Button>
 
+                {this.state.resultData.map((item,index)=>{
+                    return(
+                        <div key={index}>
+                            <p>Player: {item.userId}</p>
+                            <p>Selected Response: {this.props.question[item.selectedResponseIndex]}</p>
+                        </div>
+                    )
+                })}
                 {/* <div>
             
+               
+
                  {this.state.resultData.length ? <p> "Player": {this.state.resultData[0].userId} </p> : null} 
                 </div>
                 <div> Selected Response: {this.props.question[1]}</div> */}
-
-                {
-
-
-                    this.state.response ?
-                        this.state.resultData.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <p>Player: {item.userId}</p>
-                                    <p>Response: {this.props.question[item.selectedResponseIndex]}</p>
-                                </div>
-                            )
-                        }
-                        )
-                        : ''
-
-                }
-
+   
             </>
         )
     }
