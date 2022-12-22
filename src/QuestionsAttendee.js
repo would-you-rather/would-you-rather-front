@@ -4,6 +4,7 @@ import { Button} from 'react-bootstrap/';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
+const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 class QuestionsAttendee extends React.Component {
 
@@ -15,7 +16,7 @@ class QuestionsAttendee extends React.Component {
 
         let request = {
             method: 'POST',
-            url: `http://localhost:3002/questionResponses`,
+            url: `${REACT_APP_BACKEND_URL}/questionResponses`,
             headers: { 
                 authorization:`Bearer ${token}`
             },  
@@ -37,7 +38,7 @@ class QuestionsAttendee extends React.Component {
     render() {
         return (
             <>
-                {/* <h1>{this.props.question[0]}</h1> */}
+                <h1>Would you rather....</h1>
                 <Button onClick={() => this.saveResponse(0)}>{this.props.question[0]}</Button>
                 <Button onClick={() => this.saveResponse(1)}>{this.props.question[1]}</Button>
             </>

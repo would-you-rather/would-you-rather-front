@@ -8,6 +8,8 @@ import ShowResults from './ShowResults';
 import PlayAgain from './PlayAgain';
 
 
+const REACT_APP_BACKEND_URL= process.env.REACT_APP_BACKEND_URL;
+
 
 class GameSelection extends React.Component {
     constructor() {
@@ -32,7 +34,7 @@ class GameSelection extends React.Component {
         // Get information about the room.
         let request = {
           method: 'GET',
-          url: `http://localhost:3002/rooms/${id}`,
+          url: `${REACT_APP_BACKEND_URL}/rooms/${id}`,
           headers: {
             Authorization:`Bearer ${token}`
           }
@@ -60,7 +62,7 @@ class GameSelection extends React.Component {
 
         let request = {
             method: 'POST',
-            url:'http://localhost:3002/rooms',
+            url:`${REACT_APP_BACKEND_URL}/rooms`,
             headers: {
                 authorization:`Bearer ${token}`,
             },
@@ -91,7 +93,7 @@ class GameSelection extends React.Component {
         // Update the room in database to move to next question
         let request = {
             method: 'PUT',
-            url:`http://localhost:3002/rooms/${this.state.roomId}`,
+            url:`${REACT_APP_BACKEND_URL}/rooms/${this.state.roomId}`,
             headers: {
                 authorization:`Bearer ${token}`,
             },
@@ -122,7 +124,7 @@ class GameSelection extends React.Component {
 
         let request = {
             method: 'GET',
-            url:`http://localhost:3002/questionLists/Fun/`,
+            url:`${REACT_APP_BACKEND_URL}/questionLists/Fun/`,
             headers: {
                 authorization:`Bearer ${token}`,
             }
@@ -172,11 +174,9 @@ class GameSelection extends React.Component {
                             <option>Fun</option>
                             
                 </Form.Select>
-            </Form>
-            <div>
                 <Button
                     onClick = {this.createRoom}>Create Room</Button>
-            </div>
+            </Form>
             <div>
                 Join an existing room
                 <input type="text" placeholder="Enter Room ID" onChange={this.handleRoomIdChange} />
@@ -185,7 +185,7 @@ class GameSelection extends React.Component {
             </>
         }
        
-        {! this.state.isCurrentUserOwner && this.state.roomId && <Button onClick={() => { this.joinRoom(this.state.pendingRoomId)}}>Get current question</Button>}
+        {! this.state.isCurrentUserOwner && this.state.roomId && <Button onClick={() => { this.joinRoom(this.state.pendingRoomId)}}>Sync</Button>}
 
 
         {this.state.isCurrentUserOwner &&
@@ -223,6 +223,7 @@ class GameSelection extends React.Component {
       
         {this.state.question && 
             <>
+                <hr />
                 {this.state.question.isLast && <h1>This is the last question! 🎉</h1>}
                 <QuestionsAttendee 
                     roomId={this.state.roomId}

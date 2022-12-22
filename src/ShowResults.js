@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap/';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
+const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 class ShowResults extends React.Component {
 
     constructor(){
@@ -17,27 +19,27 @@ class ShowResults extends React.Component {
     }
 //get all question responses for this room
 
-getResponses = async () => {
-    let res = await this.props.auth0.getIdTokenClaims();
-    let token = res._raw;
-    console.log(token);
+    getResponses = async (questionIndex) => {
+        let res = await this.props.auth0.getIdTokenClaims();
+        let token = res._raw;
+        console.log(token);
 
-    let request = {
-        method: 'GET',
-        url: `http://localhost:3002/questionResponses/${this.props.roomId}`,
-        headers: {
-            authorization: `Bearer ${token}`
+        let request = {
+            method: 'GET',
+            url: `${REACT_APP_BACKEND_URL}/questionResponses/${this.props.roomId}`,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
         }
+
+        let response = await axios(request);
+        console.log("question responses fron show result",response.data);
+
+    //need to check this
+        this.setState({
+            resultData: response.data.filter(item => item.questionIndex === this.props.questionIndex)
+        })
     }
-
-    let response = await axios(request);
-    console.log("question responses fron show result",response.data);
-
-   //need to check this
-    this.setState({
-        resultData: response.data
-    })
-}
 
     render() {
 
@@ -49,20 +51,17 @@ getResponses = async () => {
                 <Button onClick={this.getResponses}>Show Results</Button>
 
                 {this.state.resultData.map((item,index)=>{
-                    return(
+                    if (item.questionIndex === this.props.questionIndex) {
+                        return(
                         <div key={index}>
                             <p>Player: {item.userId}</p>
                             <p>Selected Response: {this.props.question[item.selectedResponseIndex]}</p>
                         </div>
-                    )
+                        )
+                    } else {
+                        return null;
+                    }
                 })}
-                {/* <div>
-            
-               
-
-                 {this.state.resultData.length ? <p> "Player": {this.state.resultData[0].userId} </p> : null} 
-                </div>
-                <div> Selected Response: {this.props.question[1]}</div> */}
    
             </>
         )
