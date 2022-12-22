@@ -5,6 +5,8 @@ import {withAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
 import QuestionsAttendee from './QuestionsAttendee';
 import ShowResults from './ShowResults';
+import PlayAgain from './PlayAgain';
+
 
 
 class GameSelection extends React.Component {
@@ -27,6 +29,7 @@ class GameSelection extends React.Component {
         let token = res._raw;
         console.log(token);
     
+        // Get information about the room.
         let request = {
           method: 'GET',
           url: `http://localhost:3002/rooms/${id}`,
@@ -38,14 +41,18 @@ class GameSelection extends React.Component {
         let response = await axios(request);
         console.log(response.data);
 
+        // Get the current question in the room.
+        let currentQuestion = await this.getQuestionAtIndex(response.data.selectedQuestionIndex);
+
+        // Update the state with the room and question information.
         this.setState({
             roomId: response.data._id,
             isCurrentUserOwner: response.data.owner === this.props.auth0.user.email,
-            selectedQuestionIndex: -1,
-            question: null,
+            selectedQuestionIndex: response.data.selectedQuestionIndex,
+            question: currentQuestion,
         });
-      }
-    
+    }
+
     createRoom = async() => {
         let res =  await this.props.auth0.getIdTokenClaims();
         let token = res._raw;
@@ -139,7 +146,17 @@ class GameSelection extends React.Component {
         }
     }
 
-  
+    handleRoomIdChange = (event) => {
+        this.setState({
+            pendingRoomId: event.target.value,
+        });
+    }
+
+    joinRoom = async(id) => {
+        await this.getRoom(id);
+    }
+
+
     render() {
 
         return (
@@ -160,17 +177,19 @@ class GameSelection extends React.Component {
                 <Button
                     onClick = {this.createRoom}>Create Room</Button>
             </div>
+            <div>
+                Join an existing room
+                <input type="text" placeholder="Enter Room ID" onChange={this.handleRoomIdChange} />
+                <Button onClick={() => { this.joinRoom(this.state.pendingRoomId)}}>Join Room</Button>
+            </div>
             </>
         }
        
+        {! this.state.isCurrentUserOwner && this.state.roomId && <Button onClick={() => { this.joinRoom(this.state.pendingRoomId)}}>Get current question</Button>}
 
 
         {this.state.isCurrentUserOwner &&
             <div>
-
-                {this.state.question && 
-                    this.state.question.isLast && 
-                    <h1>This is the last question! 🎉</h1>}
 
                 {((!this.state.question) ||
                     (this.state.question && (!this.state.question.isLast))) && 
@@ -181,22 +200,14 @@ class GameSelection extends React.Component {
 
                 {this.state.question && 
                     <>
-                        <QuestionsAttendee 
-                            roomId={this.state.roomId}
-                            userId={this.props.auth0.user.email}
-                            questionListId="Fun"
-                            questionIndex={this.state.selectedQuestionIndex}
-                            question={this.state.question.question} 
-                        />
                         <ShowResults
                             roomId={this.state.roomId}
                             questionListId="Fun"
                             questionIndex={this.state.selectedQuestionIndex}
                             question={this.state.question.question}
                         />
-
                     </>
-                    }
+                }
             
                 <hr />
                 <p>Share the following link with your friends.</p>
@@ -204,10 +215,24 @@ class GameSelection extends React.Component {
                     readOnly= {true} 
                     type="text" 
                     value = {window.location.href + "?room=" + this.state.roomId} />
-                <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>         
+                <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+                   
+               <span><PlayAgain /></span> 
             </div>
         }
-
+      
+        {this.state.question && 
+            <>
+                {this.state.question.isLast && <h1>This is the last question! 🎉</h1>}
+                <QuestionsAttendee 
+                    roomId={this.state.roomId}
+                    userId={this.props.auth0.user.email}
+                    questionListId="Fun"
+                    questionIndex={this.state.selectedQuestionIndex}
+                    question={this.state.question.question} 
+                />
+            </>
+        }
         
 
         </>
