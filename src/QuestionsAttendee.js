@@ -36,6 +36,7 @@ class QuestionsAttendee extends React.Component {
 
 
     render() {
+        console.log('this.props.question', this.props.question);
         return (
             <>
                 <h1>Would you rather....</h1>

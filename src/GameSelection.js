@@ -9,6 +9,10 @@ import PlayAgain from './PlayAgain'
 
 const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
+
+
+
+
 class GameSelection extends React.Component {
   constructor () {
     super()
@@ -163,20 +167,22 @@ class GameSelection extends React.Component {
         {!this.state.roomId && (
           <>
             <Form>
-              <Form.Label>Choose a theme for the game</Form.Label>
+              <Form.Label><h2>Choose a theme for the game</h2></Form.Label>
               <Form.Select onChange={this.handleChange} as='select'>
                 <option>Fun</option>
               </Form.Select>
-              <Button variant="success"onClick={this.createRoom}>Create Room</Button>
+              <div>
+              <Button variant="outline-success"onClick={this.createRoom}>Create Room</Button>
+              </div>
             </Form>
-            <div>
+            <div className="button-container">
               Join an existing room
               <input
                 type='text'
                 placeholder='Enter Room ID'
                 onChange={this.handleRoomIdChange}
               />
-              <Button
+              <Button variant='outline-primary'
                 onClick={() => {
                   this.joinRoom(this.state.pendingRoomId)
                 }}
@@ -189,7 +195,7 @@ class GameSelection extends React.Component {
 
         {!this.state.isCurrentUserOwner && this.state.roomId && (
           <Button
-            onClick={() => {
+            onClick={() => { 
               this.joinRoom(this.state.pendingRoomId)
             }}
           >
@@ -201,7 +207,7 @@ class GameSelection extends React.Component {
           <div>
             {(!this.state.question ||
               (this.state.question && !this.state.question.isLast)) && (
-              <Button onClick={this.moveNext}>
+              <Button variant='outline-light' onClick={this.moveNext}>
                 {this.state.selectedQuestionIndex === -1
                   ? 'Start Game'
                   : 'Next Question'}
@@ -225,7 +231,7 @@ class GameSelection extends React.Component {
                     readOnly= {true} 
                     type="text" 
                     value = {window.location.href + "?room=" + this.state.roomId} />
-                <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+                <Button variant='outline-info' onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
                    
                <span><PlayAgain /></span>  */}
           </div>
@@ -252,7 +258,7 @@ class GameSelection extends React.Component {
                     readOnly= {true} 
                     type="text" 
                     value = {window.location.href + "?room=" + this.state.roomId} />
-                <Button class= "btn btn-outline-primary mr-1" onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+                <Button variant='outline-dark' class= "btn btn-outline-primary mr-1" onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
                    
                <span><PlayAgain /></span> 
       </>

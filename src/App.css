@@ -40,3 +40,30 @@ h1{
   text-shadow: 0 0 10px #000;
 
 }
+
+/* .room{
+  text-align: center;
+  position: relative;
+  padding-bottom: 30px;
+  padding-top: 40px;
+}
+
+h2{
+  text-align: center;
+  padding-left: 100px;
+}
+
+.button-container > Button{
+  margin: 8px;
+   */
+/* } */
+
+div{
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+span Button{
+margin-top: 10px;
+}

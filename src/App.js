@@ -2,6 +2,8 @@ import './App.css';
 // import './style.css';
 import './index.css';
 import AuthButtons from './auth/AuthButton';
+
+
 // import Welcome from './Welcome';
 // import GameSelection from './GameSelection';
 function App() {
@@ -13,6 +15,7 @@ function App() {
         {/* <Welcome /> */}
         
         
+       
         <AuthButtons />
         {/* <GameSelection></GameSelection> */}
       </header>

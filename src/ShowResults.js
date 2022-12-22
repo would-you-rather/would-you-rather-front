@@ -9,16 +9,16 @@ const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 class ShowResults extends React.Component {
 
-    constructor(){
+    constructor() {
 
         super();
-        this.state ={
+        this.state = {
             resultData: [],
             currentQuestionId: '',
         }
 
     }
-//get all question responses for this room
+    //get all question responses for this room
 
     getResponses = async (questionIndex) => {
         let res = await this.props.auth0.getIdTokenClaims();
@@ -44,9 +44,13 @@ class ShowResults extends React.Component {
 
     render() {
 
-        console.log(this.state);
+        console.log(this.state, 'this is state');
+        console.log(this.props, 'this props');
+
 
         return (
+
+
             <>
                 <Button onClick={this.getResponses}>Show Results</Button>
                 <ListGroup>
@@ -68,3 +72,8 @@ class ShowResults extends React.Component {
     }
 }
 export default withAuth0(ShowResults);
+
+
+
+
+
