@@ -21,7 +21,7 @@ class PlayAgain extends React.Component {
         return (
             <>
         
-                <Button onClick={this.playAgain}>Play Again</Button> 
+                <Button variant='outline-success' onClick={this.playAgain}>Play Again</Button> 
             
                
              

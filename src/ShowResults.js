@@ -54,7 +54,7 @@ class ShowResults extends React.Component {
 
             <>
                
-                <Button onClick={this.getResponses}>Show Results</Button>
+                <Button variant='outline-primary' onClick={this.getResponses}>Show Results</Button>
 
                 {this.state.resultData.map((item,index)=>{
                     return(
