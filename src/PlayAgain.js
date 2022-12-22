@@ -20,11 +20,12 @@ class PlayAgain extends React.Component {
     render() {
         return (
             <>
-        
-                <Button variant='outline-success' onClick={this.playAgain}>Play Again</Button> 
-            
-               
-             
+                <div>
+                  <span><Button variant='outline-success' onClick={this.playAgain}>Play Again</Button></span>
+                </div>
+
+
+
             </>
         )
     }
