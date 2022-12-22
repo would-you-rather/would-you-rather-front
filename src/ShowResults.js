@@ -6,61 +6,88 @@ import axios from 'axios';
 
 class ShowResults extends React.Component {
 
-    constructor(){
+    constructor() {
 
         super();
-        this.state ={
+        this.state = {
             resultData: [],
+            response: false
         }
 
     }
-//get all question responses for this room
+    //get all question responses for this room
 
-getResponses = async () => {
-    let res = await this.props.auth0.getIdTokenClaims();
-    let token = res._raw;
-    console.log(token);
+    getResponses = async () => {
+        let res = await this.props.auth0.getIdTokenClaims();
+        let token = res._raw;
+        console.log(token);
 
-    let request = {
-        method: 'GET',
-        url: `http://localhost:3002/questionResponses/${this.props.roomId}`,
-        headers: {
-            authorization: `Bearer ${token}`
+        let request = {
+            method: 'GET',
+            url: `http://localhost:3002/questionResponses/${this.props.roomId}`,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
         }
+
+        let response = await axios(request);
+        console.log("question responses from show result", response.data);
+
+        //need to check this
+        this.setState({
+            resultData: response.data,
+            response: true
+
+        })
     }
-
-    let response = await axios(request);
-    console.log("question responses fron show result",response.data);
-
-   //need to check this
-    this.setState({
-        resultData: response.data
-
-    })
-}
 
 
 
 
     render() {
 
-        console.log(this.state);
+        console.log(this.state, 'this is state');
+        console.log(this.props, 'this props');
 
-   
+
 
         return (
+
+
             <>
-                <h1>Results - {this.props.question[0]}</h1>
+                {/* <h1>Results - {this.props.question[0]}</h1> */}
                 <Button onClick={this.getResponses}>Show Results</Button>
-        
-                <div>
+
+                {/* <div>
             
                  {this.state.resultData.length ? <p> "Player": {this.state.resultData[0].userId} </p> : null} 
                 </div>
-                <div> Selected Response: {this.props.question[1]}</div>
-   
+                <div> Selected Response: {this.props.question[1]}</div> */}
+
+                {
+
+
+                    this.state.response ?
+                        this.state.resultData.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <p>Player: {item.userId}</p>
+                                    <p>Response: {this.props.question[item.selectedResponseIndex]}</p>
+                                </div>
+                            )
+                        }
+                        )
+                        : ''
+
+                }
+
             </>
         )
     }
 }
 export default withAuth0(ShowResults);
+
+
+
+
+
