@@ -22,6 +22,8 @@ class PlayAgain extends React.Component {
             <>
         
                 <Button onClick={this.playAgain}>Play Again</Button> 
+                
+             
             
                
              

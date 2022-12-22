@@ -26,8 +26,7 @@ class Welcome extends React.Component {
     console.log(auth0);
     return (
       <>
-      <h1> Welcome to This or That</h1>
-      <h2>Sign in to continue</h2>
+     
 
       <WelcomeSVG />
       

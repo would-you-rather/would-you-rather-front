@@ -15,12 +15,12 @@ function AuthButtons() {
     <>
       {isAuthenticated ?
       <div>
-        <GameSelection />
+        
         <hr />
         <Logout />
       </div>
         : 
-        <div><Welcome />
+        <div>
         <Login />
         </div>
       }
