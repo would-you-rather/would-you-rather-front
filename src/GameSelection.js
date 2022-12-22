@@ -158,7 +158,7 @@ class GameSelection extends React.Component {
   render () {
     return (
       <>
-        <h1>Welcome to This or That</h1>
+        {/* <h1>Welcome to This or That</h1> */}
 
         {!this.state.roomId && (
           <>
@@ -167,7 +167,7 @@ class GameSelection extends React.Component {
               <Form.Select onChange={this.handleChange} as='select'>
                 <option>Fun</option>
               </Form.Select>
-              <Button onClick={this.createRoom}>Create Room</Button>
+              <Button variant="success"onClick={this.createRoom}>Create Room</Button>
             </Form>
             <div>
               Join an existing room
@@ -219,7 +219,7 @@ class GameSelection extends React.Component {
               </>
             )}
                         
-                <hr />
+                {/* <hr />
                 <p>Share the following link with your friends.</p>
                 <input 
                     readOnly= {true} 
@@ -227,7 +227,7 @@ class GameSelection extends React.Component {
                     value = {window.location.href + "?room=" + this.state.roomId} />
                 <Button onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
                    
-               <span><PlayAgain /></span> 
+               <span><PlayAgain /></span>  */}
           </div>
         )}
 
@@ -246,7 +246,15 @@ class GameSelection extends React.Component {
             />
           </>
         )}
-        
+        <hr />
+                <p>Share the following link with your friends.</p>
+                <input 
+                    readOnly= {true} 
+                    type="text" 
+                    value = {window.location.href + "?room=" + this.state.roomId} />
+                <Button class= "btn btn-outline-primary mr-1" onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+                   
+               <span><PlayAgain /></span> 
       </>
     
     )

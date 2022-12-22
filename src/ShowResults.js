@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap/';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -47,22 +48,21 @@ class ShowResults extends React.Component {
 
         return (
             <>
-               
                 <Button onClick={this.getResponses}>Show Results</Button>
-
-                {this.state.resultData.map((item,index)=>{
-                    if (item.questionIndex === this.props.questionIndex) {
-                        return(
-                        <div key={index}>
-                            <p>Player: {item.userId}</p>
-                            <p>Selected Response: {this.props.question[item.selectedResponseIndex]}</p>
-                        </div>
-                        )
-                    } else {
-                        return null;
-                    }
-                })}
-   
+                <ListGroup>
+                    {this.state.resultData.map((item,index)=>{
+                        if (item.questionIndex === this.props.questionIndex) {
+                            return(
+                            <ListGroup.Item key={index}> 
+                                <p>Player: {item.userId}</p>
+                                <p>Selected Response: {this.props.question[item.selectedResponseIndex]}</p>
+                            </ListGroup.Item>
+                            )
+                        } else {
+                            return null;
+                        }
+                    })}
+                </ListGroup>
             </>
         )
     }
