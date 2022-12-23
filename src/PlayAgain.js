@@ -23,6 +23,15 @@ class PlayAgain extends React.Component {
                 <div>
                   <span><Button variant='outline-success' onClick={this.playAgain}>Play Again</Button></span>
                 </div>
+                <section>
+                <p>This</p>
+                <p>Or</p>
+                <p>That</p>
+                <p>The Choice is Yours</p>
+
+                </section>
+
+                
 
 
 

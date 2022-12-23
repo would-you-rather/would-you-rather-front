@@ -3,23 +3,34 @@ import './App.css';
 import './index.css';
 import AuthButtons from './auth/AuthButton';
 
+import Welcome from './Welcome';
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import GameSelection from './GameSelection';
+import { useAuth0 } from '@auth0/auth0-react';
+import About from './About';
 
-// import Welcome from './Welcome';
-// import GameSelection from './GameSelection';
 function App() {
-  
+  const { isAuthenticated } = useAuth0();
   return (
-    <div className="App">
-      <header className="App-header">
-      
-        {/* <Welcome /> */}
-        
-        
-       
-        <AuthButtons />
-        {/* <GameSelection></GameSelection> */}
-      </header>
-    </div>
+
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <Link to='/'>Home</Link>
+          <Link to='/About'>About</Link>
+
+
+          <AuthButtons />
+
+        </header>
+        <Routes>
+          <Route exact path='/' element={isAuthenticated ? <GameSelection /> : <Welcome />} />
+          <Route path='/About' element={<About />} />
+        </Routes>
+      </div>
+
+    </BrowserRouter>
+
   );
 }
 

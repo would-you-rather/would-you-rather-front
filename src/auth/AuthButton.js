@@ -2,8 +2,8 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Login from "./Login";
 import Logout from "./Logout";
-import GameSelection from '../GameSelection.js';
-import Welcome from '../Welcome.js';
+// import GameSelection from '../GameSelection.js';
+// import Welcome from '../Welcome.js';
 
 function AuthButtons() {
 
@@ -15,12 +15,12 @@ function AuthButtons() {
     <>
       {isAuthenticated ?
       <div>
-        <GameSelection />
+        {/* <GameSelection /> */}
         <hr />
         <Logout />
       </div>
         : 
-        <div><Welcome />
+        <div>
         <Login />
         </div>
       }

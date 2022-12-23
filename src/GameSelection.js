@@ -171,9 +171,12 @@ class GameSelection extends React.Component {
               <Form.Select onChange={this.handleChange} as='select'>
                 <option>Fun</option>
               </Form.Select>
-              <div>
-              <Button variant="outline-success"onClick={this.createRoom}>Create Room</Button>
-              </div>
+
+                <span>
+
+              <Button variant="success"onClick={this.createRoom}>Create Room</Button>
+                </span>
+
             </Form>
             <div className="button-container">
               Join an existing room
@@ -182,13 +185,18 @@ class GameSelection extends React.Component {
                 placeholder='Enter Room ID'
                 onChange={this.handleRoomIdChange}
               />
-              <Button variant='outline-primary'
+
+              <span>
+
+              <Button
+
                 onClick={() => {
                   this.joinRoom(this.state.pendingRoomId)
                 }}
               >
                 Join Room
               </Button>
+              </span>
             </div>
           </>
         )}
@@ -258,7 +266,12 @@ class GameSelection extends React.Component {
                     readOnly= {true} 
                     type="text" 
                     value = {window.location.href + "?room=" + this.state.roomId} />
-                <Button variant='outline-dark' class= "btn btn-outline-primary mr-1" onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+
+                    <span>
+
+                <Button class= "btn btn-outline-primary mr-1" onClick={() => {navigator.clipboard.writeText(window.location.href + "?room=" + this.state.roomId)}}>Copy</Button>  
+                    </span>
+
                    
                <span><PlayAgain /></span> 
       </>
