@@ -40,7 +40,7 @@ class QuestionsAttendee extends React.Component {
         return (
             <>
                 <h1>Would you rather....</h1>
-                <Button onClick={() => this.saveResponse(0)}>{this.props.question[0]}</Button>
+                <Button style={{margin: 7}} onClick={() => this.saveResponse(0)}>{this.props.question[0]}</Button>
                 <Button onClick={() => this.saveResponse(1)}>{this.props.question[1]}</Button>
             </>
         )
